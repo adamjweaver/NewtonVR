@@ -133,14 +133,22 @@ namespace NewtonVR
                 VisibilityLocked = false;
             }
 
+            if (UseButtonDown)
+            {
+                if (CurrentlyInteracting != null && CurrentlyInteracting.IsLocking)
+                {
+                    EndInteraction(null);
+                }
+            }
+
             if (HoldButtonDown == true)
             {
-                if (CurrentlyInteracting == null)
+                 if (CurrentlyInteracting == null)
                 {
                     PickupClosest();
                 }
             }
-            else if (HoldButtonUp == true && CurrentlyInteracting != null)
+            else if (HoldButtonUp == true && CurrentlyInteracting != null && !CurrentlyInteracting.IsLocking)
             {
                 EndInteraction(null);
             }
@@ -531,6 +539,11 @@ namespace NewtonVR
             }
 
             CurrentHandState = HandState.Idle;
+        }
+
+        public void TriggerHaptic(ushort duration)
+        {
+            Controller.TriggerHapticPulse(duration);
         }
 
         public void ForceGhost()

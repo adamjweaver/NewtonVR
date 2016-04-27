@@ -8,7 +8,10 @@ namespace NewtonVR
         public Rigidbody Rigidbody;
 
         public bool CanAttach = true;
-        
+
+        [Tooltip("If this is enabled, the item stays attached to the hand after the grip button has been released")]
+        public bool IsLocking = false;
+
         public bool DisableKinematicOnAttach = true;
         public bool EnableKinematicOnDetach = false;
         public float DropDistance = 1;
